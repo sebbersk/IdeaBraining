@@ -36,3 +36,50 @@
         * [x] /ideas/:id/comment/:comment_id
     * Put Comment (Edit)
         * [x] /ideas/:id/comment/:comment_id
+
+## Front-end
+
+* [] Initialization tasks
+    * [] Create main layout with partials:
+        * [] Put {{{body}}} in a container
+        * [] _header (nav)
+        * [] _footer
+    * [] Add css Framework (Bootstrap/bulma/materialize)
+    * [] Add icons (Font-awesome)
+    * [] Install template engine (Handlebars)
+* [] Index Pages
+    * [] index.handlebars
+        * [] Top 3 Rated ideas (If existing) in one column
+        * [] Card With Login/Register possibilities
+    * [] about.handlebars
+        * [] Cards with information (Lorem ipsum)
+* [] Auth Pages
+    * [] register.handlebars
+        * [] Form with:
+            * [] Name
+            * [] Username
+            * [] Password
+            * [] Confirm Password
+    * [] login.handlebars
+        * [] Form with:
+            * [] Username
+            * [] Password
+
+## Back-end
+
+* [] Initialization Tasks
+    * [] Install body-parser, passport, passport-local, mongoose, bcryptjs
+* [] Set up middleware
+    * [] app.use body-parser
+* [] Set up mongoose Schemas
+    * [] User
+        * Name
+        * Username
+        * Password (hashed)
+        * (Image)
+
+* [] Idea Pages
+    * [] index.handlebars (ideas/index)
+        * [] 
+
+    
