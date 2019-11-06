@@ -51,10 +51,13 @@ router.post("/:id/comment", (req, res) => {
 })
 
 router.delete("/:id/comment/:comment_id", (req, res) => {
+    // Has to be logged in & owner of comment
+    // Maybe idea owner can delete too
     res.send("Deleted comment");
 })
 
 router.put("/:id/comment/:comment_id", (req, res) => {
+    // Has to be logged in & owner of comment
     res.send("Edited comment");
 })
 module.exports = router;

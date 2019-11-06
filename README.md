@@ -32,7 +32,7 @@
 * [x] Comment Route Inside Ideas file
     * Post Comment
         * [x] /ideas/:id/comment (id of Idea)
-    * Delete Comment 
+    * Delete Comment  
         * [x] /ideas/:id/comment/:comment_id
     * Put Comment (Edit)
         * [x] /ideas/:id/comment/:comment_id
