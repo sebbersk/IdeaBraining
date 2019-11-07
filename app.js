@@ -1,4 +1,5 @@
 const express = require("express");
+const exphbs = require("express-handlebars");
 
 const indexRoutes = require("./routes/index");
 const authRoutes = require("./routes/auth");
@@ -6,6 +7,8 @@ const ideasRoutes = require("./routes/ideas");
 
 const app = express();
 
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
 
 
 app.use("/", indexRoutes);

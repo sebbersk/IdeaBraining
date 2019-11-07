@@ -39,20 +39,21 @@
 
 ## Front-end
 
-* [] Initialization tasks
-    * [] Create main layout with partials:
-        * [] Put {{{body}}} in a container
-        * [] _header (nav)
-        * [] _footer
-    * [] Add css Framework (Bootstrap/bulma/materialize)
-    * [] Add icons (Font-awesome)
-    * [] Install template engine (Handlebars)
+* [x] Initialization tasks
+    * [x] Install template engine (Handlebars)
+    * [x] Create main layout with partials:
+        * [x] Put {{{body}}} in a container
+        * [x] _header (nav)
+        * [x] _footer
+    * [x] Add css Framework (Bootstrap/bulma/materialize)
+    * [x] Add icons (Font-awesome)
+    
 * [] Index Pages
-    * [] index.handlebars
-        * [] Top 3 Rated ideas (If existing) in one column
-        * [] Card With Login/Register possibilities
-    * [] about.handlebars
-        * [] Cards with information (Lorem ipsum)
+    * [x] index.handlebars
+        * [x] Top 3 Rated ideas (If existing) in one column
+        * [x] Card With Login/Register possibilities
+    * [x] about.handlebars
+        * [x] Cards with information (Lorem ipsum)
 * [] Auth Pages
     * [] register.handlebars
         * [] Form with:
