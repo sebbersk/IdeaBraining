@@ -5,6 +5,8 @@
 * Let People Comment & Rate Your Ideas
 * Brainstorm Together!
 
+Simple CRUD website/app. Using [Passport](http://www.passportjs.org) for users registration and [MongoDB](https://www.mongodb.com) with [Mongoose](https://mongoosejs.com) for storage. As mentioned above, one can register, login, write ideas, put comments on ideas and like or dislike ideas or comments.  
+
 ## Routes
 
 * [x] Index Route, Basic Route
@@ -54,33 +56,120 @@
         * [x] Card With Login/Register possibilities
     * [x] about.handlebars
         * [x] Cards with information (Lorem ipsum)
-* [] Auth Pages
-    * [] register.handlebars
-        * [] Form with:
-            * [] Name
-            * [] Username
-            * [] Password
-            * [] Confirm Password
-    * [] login.handlebars
-        * [] Form with:
-            * [] Username
-            * [] Password
+* [x] Auth Pages
+    * [x] register.handlebars
+        * [x] Form with:
+            * [x] Name
+            * [x] Lastname
+            * [x] Username
+            * [x] Password
+            * [x] Confirm Password
+    * [x] login.handlebars
+        * [x] Form with:
+            * [x] Username
+            * [x] Password
 
 ## Back-end
 
-* [] Initialization Tasks
-    * [] Install body-parser, passport, passport-local, mongoose, bcryptjs
-* [] Set up middleware
-    * [] app.use body-parser
-* [] Set up mongoose Schemas
-    * [] User
-        * Name
-        * Username
-        * Password (hashed)
-        * (Image)
+* [x] Initialization Tasks
+    * [x] Install body-parser, passport, passport-local, mongoose, bcryptjs
+* [x] Set up middleware
+    * [x] app.use body-parser
+    * [x] mongoose connection
+* [x] Set up mongoose Schemas
+    * [x] User 
+        * Name REMEMBER TO TRIM
+        * Lastname REMEMBER TO TRIM
+        * Username  REMEMBER TO TRIM
+        * Password (hashed) REMEBER TO TRIM
+    * [x] Ideas
+        * Topic 
+        * Title
+        * Body
+        * Date
+        * User/author (id & maybe username)
+        * Comments
+    * [x] Comments 
+        * Body
+        * Date
+        * User/author
+* [x] Set up Passport with Local Strategy
+* [x] Set up express-session
+* [x] Seed DB With Ideas
+* [x] Get Ideas from DB 
+        
+ ## Front-end 
+* Just Styling  
+* [x] Idea Pages
+    * [x] index.handlebars (ideas/index)
+        * [x] show ideas in cards 
+    * [x] show.handlebars
+        * [x] card to show idea
+        * [x] javascript to show comment form
+        * [/] Thumbs up & Thumbs down MAYBE
+        * [x] Profile of Author
+        * [x] Other Topic Related ideas
+    * [x] add.handlebars
+        * [x] Add form with:
+            * [x] Topic Select
+            * [x] Title
+            * [x] Body
+    * [x] edit.handlebars
+         * [x] Add form with:
+            * [x] Topic Select
+            * [x] Title
+            * [x] Body
 
-* [] Idea Pages
-    * [] index.handlebars (ideas/index)
-        * [] 
+## Back-end
+* [x] User Registration  
+    * [x] Retrieve Data from form
+    * [x] Validate Data
+    * [x] Hash password
+    * [x] Create User
+* [x] User Login
+    * [x] Retrieve Data from form
+    * [x] Validate Data
+    * [x] Login if success
+* [x] Add Idea from form
+    * [x] Retrieve Data from form
+    * [x] Validate Data
+    * [x] Save in DB
+    * [x] redirect to /ideas
 
-    
+## Front-end
+* [x] Truncate & Render Ideas
+* [x] Separate into categories on Index
+* [x] Fix Icons, edit, delete ideas or comments.
+* [x] Download method override
+* [x] Fix form routes, for edit,put,delete (ideas, comments).¨
+    * [x] Ideas
+    * [x] Comments (Popup to delete?)
+* [x] Add Forms 
+
+
+
+## Back-end
+* [x] Fix logic for POST,PUT, DELETE Idea Routes
+* [x] Protect these routes
+* [x] Fix logic for Comment Routes, POST,PUT,DELETE 
+ * [x] (Middleware for protection?)
+* [x] Change Ideas model, Add Likes. 
+    * [x] Number of likes, starts at 1, 
+    * [x] Array of Usernames/ ids?
+* [x] Change Comment model, add likes && Routes/Logic
+
+## Front-end
+* [x] Link to Routes to update likes.
+* [x] Hide buttons if logged in or not:
+    * [x] Register/Login
+    * [x] Logout
+    * [x] Add Idea
+    * [x] Comments
+    * [x] Edit/Delete
+* [x] Welcome User!
+* [] Show most Liked Ideas at /
+
+...
+
+
+

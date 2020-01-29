@@ -1,0 +1,220 @@
+<div class="row">
+    <div class="col-sm-12 col-md-9">
+        <h3>{{idea.title}} <a href="/ideas/edit/{{idea.id}}"><i class="fas fa-edit edit-idea"></i></a></h3>
+        <div class="card">
+            <div class="card-body">
+                <p>{{stripTags idea.body}}</p>
+            </div>
+            <small class="text-right">{{idea.date}}</small>
+            <div class="card-footer">
+                {{#if user}}
+                <button type="button" class="btn btn-sm btn-outline-secondary add-comment">Add
+                    Comment</button>
+                {{else}}
+                <p><a href="/auth/login">Login</a> If You Want To Comment. Don't Have An Account? Register <a
+                        href="/auth/register">Here</a></p>
+                {{/if}}
+                <p class="text-right idea-rating">{{#if user}}<a {{#if up}} style="color:green" {{/if}}
+                        href="/ideas/{{idea.id}}/up"><i class="fas fa-thumbs-up"></i></a>{{else}}
+                    <strong>Thumbs:</strong> {{/if}}
+                    {{idea.thumbs.thumbs}}
+                    {{#if user}} <a {{#if down}} style="color:red" {{/if}}href="/ideas/{{idea.id}}/down"><i
+                            class="fas fa-thumbs-down"></i></a>{{/if}}</p>
+
+                <form class="comment-form" action="/ideas/{{idea.id}}/comment" method="POST">
+                    <div class="form-group">
+                        <label for="commentbody">Comment</label>
+                        <textarea class="form-control comtext" name="commentbody" id="commentbody"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-outline-secondary">Add
+                        Comment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 ">
+        <h3>Want To Read More?</h3>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Users Name and Last name</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Username</h6>
+                <p class="card-text">Click on the link below to read other Ideas by NAME</p>
+                <hr>
+                <a href="/ideas/user/{{idea.author.id}}" class="card-link">NAMES's Profile</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-12 col-md-9 comment-col">
+        <h3>Comments</h3>
+        <div class="scroll-comments">
+
+            {{#each idea.comments}}
+            <div class="card">
+                <div class="card-body">
+                    <p>{{body}}</p>
+
+                    <small class="text-right comment-date">{{date}}</small>
+                </div>
+                <div class="card del-comment-form">
+                    <form action="/ideas/{{../idea.id}}/comment/{{id}}?_method=DELETE" method="POST">
+                        <p>Are You Sure You Want To Delete this?</p>
+                        <button class="btn btn-sm btn-outline-secondary" type="submit">Yes</button>
+                        <button class="btn btn-sm btn-outline-secondary cancel-delete" type="button">Cancel</button>
+                    </form>
+                </div>
+                <hr>
+                {{#if ../user}}
+                {{{isCommentOwner ../user author}}}
+                {{/if}}
+                <span class="text-right comment-rating">{{#if ../user}}<a
+                        style="{{commentRatingUp ../user thumbs.thumbersUp}}"
+                        href="/ideas/{{../idea.id}}/comment/{{id}}/up"> <i class="fas fa-thumbs-up"></i></a>{{else}}
+                    <strong>Thumbs:</strong> {{/if}}
+                    {{thumbs.thumbs}} {{#if ../user}}<a style="{{commentRatingDown ../user thumbs.thumbersDown }}"
+                        href="/ideas/{{../idea.id}}/comment/{{id}}/down"><i class="fas fa-thumbs-down"></i></a>{{/if}}
+                </span>
+                <small class="text-center comment-author">Comment By: <strong>{{author.username}}</strong></small>
+                <form class="edit-comment-form" action="/ideas/{{../idea.id}}/comment/{{id}}?_method=PUT" method="POST">
+                    <div class="form-group">
+                        <label for="commentbody">Comment</label>
+                        <textarea class="form-control comtext" name="commentbody" id="commentbody">{{body}}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-outline-secondary">Add
+                        Comment</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary close-edit-com">Cancel</button>
+
+                </form>
+            </div>
+            {{/each}}
+
+
+
+        </div>
+    </div>
+    <div class="col-md-3">
+        <h3>Topic Related Ideas</h3>
+        <div class="card mb-3">
+            <h3 class="card-header">Topic</h3>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+
+            <div class="card-footer text-muted">
+                &copy; IdeaBraining 2019
+            </div>
+        </div>
+        <form action="/ideas/{{idea.id}}?_method=DELETE" method="POST">
+            <button class="btn btn-danger">Delete Idea <i class="fas fa-trash-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .idea-rating,
+    .comment-date {
+        display: inline;
+        float: right;
+    }
+
+    .comment-rating {
+        display: inline;
+        float: right;
+        padding: 0 20px;
+    }
+
+    .comment-author {
+        float: right;
+        padding: 0 10px;
+    }
+
+    .comtext {
+        border: none;
+        border-bottom: 1px solid grey;
+        outline: none;
+        min-height: 4rem;
+        resize: none;
+        line-height: 20px;
+        border-radius: 0;
+        width: 100%
+    }
+
+    .comment-form,
+    .edit-comment-form,
+    .del-comment-form {
+        display: none;
+    }
+
+    .del-comment-form {
+        padding: 10px;
+    }
+
+    .edit-comment-form {
+        height: 100%;
+        padding: 15px;
+    }
+
+    .close-edit-com {
+        width: 30%;
+        margin: 10px;
+    }
+
+    .scroll-comments {
+        overflow: scroll;
+        height: 20rem;
+
+    }
+
+    .edit-idea:hover {
+        color: #165ba8;
+    }
+</style>
+
+<script>
+    const addCommentForm = document.querySelector(".comment-form");
+    const button = document.querySelector(".add-comment");
+    const commentCol = document.querySelector(".comment-col");
+
+    button.addEventListener("click", (e) => {
+        if (addCommentForm.style.display == "none") {
+            addCommentForm.style.display = "block";
+            button.textContent = "Hide Form"
+        } else {
+            addCommentForm.style.display = "none"
+            button.textContent = "Add Comment";
+        }
+    })
+    commentCol.addEventListener("click", (e) => {
+        if (e.target.classList.contains("edit-comment")) {
+            e.target.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.style.display = "none"; // cardbody
+            e.target.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.style.display = "none"; // delete-comment-form
+            e.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.style.display = "block";  // edit-comment-form
+            e.target.parentElement.style.display = "none"; // p
+        } else if (e.target.classList.contains("close-edit-com")) {
+            e.target.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.style.display = "block"; // p
+
+            e.target.parentElement.parentElement.firstChild.nextSibling.style.display = "block"; // cardbody
+            e.target.parentElement.style.display = "none"; // form
+
+        }
+        else if (e.target.classList.contains("delete-comment")) {
+            e.target.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.style.display = "block"; //del-comment-form
+            e.target.parentElement.style.display = "none";
+            e.target.parentElement.previousSibling.previousSibling.style.display = "none";
+        }
+        else if (e.target.classList.contains("cancel-delete")) {
+            e.target.parentElement.parentElement.style.display = "none";
+            e.target.parentElement.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.style.display = "block";
+            e.target.parentElement.parentElement.nextSibling.nextSibling.style.display = "block";
+        }
+    })
+
+
+
+</script>

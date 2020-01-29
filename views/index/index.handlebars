@@ -1,5 +1,5 @@
 <div class="jumbotron space">
-    <h1 class="display-4">Welcome {{!-- If user put name here --}}!</h1>
+    <h1 class="display-4">Welcome {{#if user}} {{user.name}} {{user.lastname}} {{/if}}!</h1>
     <p class="lead">Share Ideas, Comment On Others, Work Together, Be Inspired!</p>
     <hr class="my-4">
     <h3 class="text-center my-3">Most Upvoted Ideas</h3>
@@ -38,8 +38,12 @@
             </div>
         </div>
     </div>
-    <p>Seems Interesting? What Are You Waiting for? Join Now Is Free! <a href="/auth/register">Register</a> Or <a
-            href="auth/login">Login</a></p>
+    {{#if user}}
+    {{else}}
+    <p class="text-center">Seems Interesting? What Are You Waiting for? Join Now Is Free! <a
+            href="/auth/register">Register</a> Or <a href="auth/login">Login</a></p>
+    {{/if}}
+    <p class="text-center">Want To Read More Ideas? Click <a href="/ideas">Here</a></p>
 </div>
 
 <style>

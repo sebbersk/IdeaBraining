@@ -1,0 +1,34 @@
+<h3>Add Idea</h3>
+<div class="card">
+    <form action="/ideas" method="POST">
+        <div class="form-group p-2">
+            <label for="topic">Select Topic</label>
+            <select class="form-control" name="topic" id="topic" required>
+                <option disabled value="">Select Topic</option>
+                <option>Sports</option>
+                <option>Tech</option>
+                <option>Video</option>
+                <option>Gaming</option>
+                <option>Other</option>
+            </select>
+        </div>
+        <div class="form-group p-2">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title" id="title" placeholder="Title" required>
+        </div>
+        <div class="form-group p-2">
+            <label for="commentbody">Comment</label>
+            <textarea class="form-control comtext" name="commentbody" id="commentbody" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary m-3">Add Idea</button>
+    </form>
+</div>
+<style>
+    .comtext {
+        min-height: 10rem;
+        resize: none;
+        line-height: 20px;
+        border-radius: 0;
+        width: 100%
+    }
+</style>

@@ -1,0 +1,32 @@
+<h1 class="display-4">Public Ideas</h1>
+{{{activePage active}}}
+
+
+
+
+<div class="row scroll-ideas">
+    {{#each ideas}}
+    <div class="col-md-4">
+        <div class="card border-secondary mb-3">
+            <div class="card-header">{{topic}}</div>
+            <div class="card-body">
+                <h4 class="card-title">{{title}}</h4>
+                <p class="card-text story-text">{{truncate (stripTags body) 30}}</p>
+                <a href="/ideas/show/{{id}}" class="card-link">Read More</a>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+
+<style>
+    .scroll-ideas {
+        overflow: scroll;
+        height: 60vh
+    }
+
+    .story-text {
+        height: 50px;
+    }
+</style>
