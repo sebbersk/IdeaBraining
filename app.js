@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_URI || "mongodb://localhost/ideabraining_DB",
 
 require("./config/passport")(passport);
 
-const { activePage, truncate, stripTags, commentRatingUp, commentRatingDown, isCommentOwner } = require("./helpers/hbs");
+const { activePage, truncate, stripTags, commentRatingUp, commentRatingDown, isCommentOwner, isIdeaOwner } = require("./helpers/hbs");
 const app = express();
 const indexRoutes = require("./routes/index");
 const authRoutes = require("./routes/auth");
@@ -41,7 +41,8 @@ app.engine('handlebars', exphbs({
         stripTags: stripTags,
         commentRatingUp: commentRatingUp,
         commentRatingDown: commentRatingDown,
-        isCommentOwner: isCommentOwner
+        isCommentOwner: isCommentOwner,
+        isIdeaOwner: isIdeaOwner
     },
     defaultLayout: "main"
 }));

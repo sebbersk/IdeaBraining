@@ -1,6 +1,8 @@
 <div class="row">
     <div class="col-sm-12 col-md-9">
-        <h3>{{idea.title}} <a href="/ideas/edit/{{idea.id}}"><i class="fas fa-edit edit-idea"></i></a></h3>
+        <h3>{{idea.title}}
+            {{#if (isIdeaOwner user.username idea.author.username)}}<a href="/ideas/edit/{{idea.id}}"><i
+                    class="fas fa-edit edit-idea"></i></a>{{/if}}</h3>
         <div class="card">
             <div class="card-body">
                 <p>{{stripTags idea.body}}</p>
@@ -36,11 +38,10 @@
         <h3>Want To Read More?</h3>
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Users Name and Last name</h4>
-                <h6 class="card-subtitle mb-2 text-muted">Username</h6>
-                <p class="card-text">Click on the link below to read other Ideas by NAME</p>
+                <h4 class="card-title">{{idea.author.username}}</h4>
+                <p class="card-text">Click on the link below to read other Ideas from {{idea.author.username}}</p>
                 <hr>
-                <a href="/ideas/user/{{idea.author.id}}" class="card-link">NAMES's Profile</a>
+                <a href="/ideas/user/{{idea.author.id}}" class="card-link">{{idea.author.username}}'s Profile</a>
 
             </div>
         </div>
@@ -98,21 +99,23 @@
     <div class="col-md-3">
         <h3>Topic Related Ideas</h3>
         <div class="card mb-3">
-            <h3 class="card-header">Topic</h3>
+            <h3 class="card-header">{{idea.topic}}</h3>
 
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
+                {{#each idea.toIdeas}}
+                <li class="list-group-item"><a href="/ideas/show/{{id}}">{{title}}</a></li>
+                {{/each}}
+
             </ul>
 
             <div class="card-footer text-muted">
                 &copy; IdeaBraining 2019
             </div>
         </div>
+        {{#if (isIdeaOwner user.username idea.author.username)}}
         <form action="/ideas/{{idea.id}}?_method=DELETE" method="POST">
             <button class="btn btn-danger">Delete Idea <i class="fas fa-trash-alt"></i></button>
-        </form>
+        </form>{{/if}}
     </div>
 </div>
 

@@ -166,6 +166,10 @@ module.exports = {
             class="fas fa-trash-alt delete-comment"></i></p>`;
         }
         return ""
+    },
+    isIdeaOwner: function (user, author) {
+        return user === author;
+
     }
 
 }

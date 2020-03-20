@@ -2,12 +2,13 @@ const router = require("express").Router();
 const mongoose = require("mongoose");
 const Idea = mongoose.model("ideas");
 const Comment = mongoose.model("comments");
+const User = mongoose.model("users");
 const { isLoggedIn, isCommentOwner } = require("../helpers/auth");
 
 // IDEAS ROUTES
 router.get("/", (req, res) => {
     Idea.find().sort({ date: "desc" }).then(ideas => {
-
+        console.log(ideas);
         res.render("ideas/index", {
             ideas: ideas,
             active: "all"
@@ -69,7 +70,17 @@ router.get("/my", isLoggedIn, (req, res) => {
 })
 
 router.get("/user/:id", (req, res) => {
-    res.send("User (id) Ideas");
+    let owner = {}
+    User.findOne({ _id: req.params.id }).then(user => {
+        owner = user;
+    });
+
+    Idea.find({ "author.id": req.params.id }).sort({ thumbs: "desc" }).then(ideas => {
+        res.render("ideas/user", {
+            ideas: ideas,
+            user: owner
+        })
+    })
 })
 
 router.get("/add", (req, res) => {
@@ -98,27 +109,41 @@ router.get("/edit/:id", isLoggedIn, (req, res) => {
 
 router.get("/show/:id", (req, res) => {
     // Idea has to be public
+    let toIdeas = {}
     Idea.findOne({ _id: req.params.id }).populate({ path: "comments", options: { sort: { date: "desc" } } }).then(idea => {
         if (idea) {
+            Idea.find({ topic: idea.topic }).where("_id").ne(idea._id).limit(3).then(ideas => {
+                idea.toIdeas = ideas;
+            })
+
             if (req.user) {
+
                 const index = idea.thumbs.thumbersUp.indexOf(req.user.username);
+
                 if (index > -1) {
-                    console.log(idea);
                     res.render("ideas/show", {
                         idea: idea,
                         up: true,
 
                     })
-                } if (idea.thumbs.thumbersDown.indexOf(req.user.username) > -1) {
+                } else if (idea.thumbs.thumbersDown.indexOf(req.user.username) > -1) {
                     res.render("ideas/show", {
                         idea: idea,
                         down: true,
 
                     })
+                } else {
+                    res.render("ideas/show", {
+                        idea: idea,
+
+
+                    })
                 }
             } else {
+
                 res.render("ideas/show", {
                     idea: idea,
+
 
                 })
             }
