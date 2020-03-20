@@ -14,7 +14,7 @@ require("./models/Comment");
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/ideabraining_DB", {
+mongoose.connect(process.env.MONGO_URI || "mongodb://localhost/ideabraining_DB", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, (err) => {
