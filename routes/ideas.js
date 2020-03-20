@@ -70,7 +70,7 @@ router.get("/my", isLoggedIn, (req, res) => {
 })
 
 router.get("/user/:id", (req, res) => {
-    let owner = {}
+    var owner = {}
     User.findOne({ _id: req.params.id }).then(user => {
         owner = user;
     });
