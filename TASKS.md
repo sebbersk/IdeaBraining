@@ -1,3 +1,5 @@
+# IdeaBraining
+
 ## Routes
 
 * [x] Index Route, Basic Route
@@ -163,5 +165,8 @@
     * [] Wrong password or username
     * [] User already registered
     * [] When login in/out
+
+## Details
+* [] Remove CSS/JS from HBS-files.
 ...
 
