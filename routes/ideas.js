@@ -115,9 +115,7 @@ router.get("/show/:id", (req, res) => {
             Idea.find({ topic: idea.topic }).where("_id").ne(idea._id).limit(3).then(ideas => {
                 idea.toIdeas = ideas;
             })
-
             if (req.user) {
-
                 const index = idea.thumbs.thumbersUp.indexOf(req.user.username);
 
                 if (index > -1) {
