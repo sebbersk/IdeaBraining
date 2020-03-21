@@ -146,6 +146,7 @@ router.get("/show/:id", (req, res) => {
                     })
                 }
             } else {
+
                 res.render("ideas/show", {
                     idea: idea,
 
