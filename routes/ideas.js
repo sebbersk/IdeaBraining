@@ -5,6 +5,7 @@ const Comment = mongoose.model("comments");
 const User = mongoose.model("users");
 const { isLoggedIn, isCommentOwner } = require("../helpers/auth");
 
+
 // IDEAS ROUTES
 router.get("/", (req, res) => {
     Idea.find().sort({ date: "desc" }).then(ideas => {
@@ -109,12 +110,16 @@ router.get("/edit/:id", isLoggedIn, (req, res) => {
 
 router.get("/show/:id", (req, res) => {
     // Idea has to be public
-    let toIdeas = {}
+
     Idea.findOne({ _id: req.params.id }).populate({ path: "comments", options: { sort: { date: "desc" } } }).then(idea => {
         if (idea) {
+
             Idea.find({ topic: idea.topic }).where("_id").ne(idea._id).limit(3).then(ideas => {
+
                 idea.toIdeas = ideas;
             })
+
+
             if (req.user) {
                 const index = idea.thumbs.thumbersUp.indexOf(req.user.username);
 
@@ -123,11 +128,13 @@ router.get("/show/:id", (req, res) => {
                         idea: idea,
                         up: true,
 
+
                     })
                 } else if (idea.thumbs.thumbersDown.indexOf(req.user.username) > -1) {
                     res.render("ideas/show", {
                         idea: idea,
                         down: true,
+
 
                     })
                 } else {
@@ -135,12 +142,13 @@ router.get("/show/:id", (req, res) => {
                         idea: idea,
 
 
+
                     })
                 }
             } else {
-
                 res.render("ideas/show", {
                     idea: idea,
+
 
 
                 })
@@ -472,4 +480,5 @@ router.get("/:id/comment/:comment_id/down", isLoggedIn, (req, res) => {
         }
     })
 })
+
 module.exports = router;
