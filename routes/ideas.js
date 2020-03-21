@@ -78,7 +78,7 @@ router.get("/user/:id", (req, res) => {
     Idea.find({ "author.id": req.params.id }).sort({ thumbs: "desc" }).then(ideas => {
         res.render("ideas/user", {
             ideas: ideas,
-            user: owner
+            owner: owner
         })
     })
 })
